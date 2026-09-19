@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://UI/TrackRow.cs" id="1_trackrow"]
+
+[node name="TrackRow" type="HBoxContainer" node_paths=PackedStringArray("NameLabel", "StatusLabel", "SettingsButton", "DeleteButton")]
+custom_minimum_size = Vector2(137, 0)
+layout_mode = 2
+script = ExtResource("1_trackrow")
+NameLabel = NodePath("Name/Label")
+StatusLabel = NodePath("Status/Label")
+SettingsButton = NodePath("Action/Buttons/SettingsButton")
+DeleteButton = NodePath("Action/Buttons/DeleteButton")
+
+[node name="Name" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Name"]
+layout_mode = 2
+text = "Name"
+
+[node name="Status" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.55
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Status"]
+layout_mode = 2
+text = "Status"
+
+[node name="Action" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(84, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+mouse_filter = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Action"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DeleteButton" type="Button" parent="Action/Buttons"]
+layout_mode = 2
+text = "删除"
+
+[node name="SettingsButton" type="Button" parent="Action/Buttons"]
+layout_mode = 2
+text = "设置"

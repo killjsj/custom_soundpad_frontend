@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="apoFrontend"
+config/version="0.1.0"
+run/main_scene="res://control.tscn"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+run/low_processor_mode=true
+run/low_processor_mode_sleep_usec=18500
+config/icon="res://icon.svg"
+
+[audio]
+
+driver/mix_rate=48000
+
+[autoload]
+
+MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
+CSharpApoWriter="*res://apo/ApoWriter.cs"
+
+[display]
+
+window/size/initial_position_type=4.0
+window/subwindows/embed_subwindows=false
+window/per_pixel_transparency/allowed=true
+
+[dotnet]
+
+project/assembly_name="apoFrontend"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_mcp_toolkit/plugin.cfg", "res://addons/table_container/plugin.cfg")
+
+[mcp_toolkit]
+
+status="No .mcp.json found — use Project > Tools > MCP Toolkit > Write .mcp.json to create one."
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"

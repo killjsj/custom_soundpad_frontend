@@ -1,0 +1,17 @@
+{
+  "hotkeys": {
+    "next": {
+      "combo": "",
+      "passthrough": false
+    },
+    "play": {
+      "combo": "",
+      "passthrough": false
+    },
+    "prev": {
+      "combo": "",
+      "passthrough": false
+    }
+  },
+  "tracks": []
+}

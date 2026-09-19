@@ -1,0 +1,622 @@
+[gd_scene format=3 uid="uid://bxmj84y2rnmul"]
+
+[ext_resource type="Script" uid="uid://baus40q78w7uq" path="res://addons/table_container/table_container.gd" id="1_62e2m"]
+[ext_resource type="Script" uid="uid://duvime8amlcis" path="res://SoundpadMain.cs" id="1_qtu10"]
+[ext_resource type="Script" uid="uid://duy70ltfvdhhc" path="res://AudioVisualizer.cs" id="4_ee4bf"]
+[ext_resource type="Script" uid="uid://coj6nphitwcp7" path="res://OverlayHud.cs" id="4_kbped"]
+[ext_resource type="PackedScene" path="res://UI/TrackRow.tscn" id="5_trackrow"]
+[ext_resource type="PackedScene" path="res://UI/DeviceRow.tscn" id="6_devrow"]
+[ext_resource type="Script" uid="uid://b8tljl7rfrq58" path="res://Core/PluginHost.cs" id="7_host"]
+[ext_resource type="Script" uid="uid://b62torhkq0vrm" path="res://Plugins/PlaybackPlugin.cs" id="8_playback"]
+[ext_resource type="Script" uid="uid://cofv373ocnesv" path="res://Plugins/TrackListPlugin.cs" id="9_tracks"]
+[ext_resource type="Script" uid="uid://fa2uolcd55rx" path="res://Plugins/PlaylistPlugin.cs" id="10_playlist"]
+[ext_resource type="Script" uid="uid://jvkquiwyxs2l" path="res://Plugins/HotkeyPlugin.cs" id="11_hotkeys"]
+[ext_resource type="Script" uid="uid://de6mwee0k6js" path="res://Plugins/DevicePlugin.cs" id="12_devices"]
+[ext_resource type="Script" uid="uid://c6cmoptk2q1w3" path="res://Plugins/OverlayPlugin.cs" id="13_overlay"]
+[ext_resource type="Script" uid="uid://cc1p8vtq2c0xk" path="res://Plugins/StatusPlugin.cs" id="14_status"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj5cn"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.007843138, 0, 0.047058824, 0.57254905)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Control" type="Control" unique_id=1373179744 node_paths=PackedStringArray("PluginHost")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qtu10")
+PluginHost = NodePath("PluginHost")
+
+[node name="PluginHost" type="Node" parent="." unique_id=1796006022]
+script = ExtResource("7_host")
+
+[node name="PlaybackPlugin" type="Node" parent="PluginHost" unique_id=495101558 node_paths=PackedStringArray("OpenButton", "PlayButton", "MonitorToggle", "VisualizerMode", "Visualizer", "AudioFileDialog", "ProgressBar", "TimeLabel")]
+script = ExtResource("8_playback")
+OpenButton = NodePath("../../Main/TopBar/Toolbar/OpenButton")
+PlayButton = NodePath("../../Main/TopBar/Toolbar/PlayButton")
+MonitorToggle = NodePath("../../Main/TopBar/Toolbar/MonitorToggle")
+VisualizerMode = NodePath("../../Main/TopBar/Toolbar/VisualizerMode")
+Visualizer = NodePath("../../Main/Visualizer")
+AudioFileDialog = NodePath("../../AudioFileDialog")
+ProgressBar = NodePath("../../Main/TopBar/ProgressRow/ProgressBar")
+TimeLabel = NodePath("../../Main/TopBar/ProgressRow/TimeLabel")
+
+[node name="TrackListPlugin" type="Node" parent="PluginHost" unique_id=1607186509 node_paths=PackedStringArray("AudioTable", "TrackDialog", "TrackTitleLabel", "TrackHotkeyButton", "TrackClearButton", "TrackPassthroughCheck", "TrackLoopCheck", "TrackOkButton", "TrackCancelButton")]
+script = ExtResource("9_tracks")
+AudioTable = NodePath("../../Main/TablesRow/AudioFiles/TableContainer")
+TrackRowScene = ExtResource("5_trackrow")
+TrackDialog = NodePath("../../TrackDialog")
+TrackTitleLabel = NodePath("../../TrackDialog/Margin/VBox/Title")
+TrackHotkeyButton = NodePath("../../TrackDialog/Margin/VBox/HotkeyRow/HotkeyButton")
+TrackClearButton = NodePath("../../TrackDialog/Margin/VBox/HotkeyRow/ClearButton")
+TrackPassthroughCheck = NodePath("../../TrackDialog/Margin/VBox/PassthroughCheck")
+TrackLoopCheck = NodePath("../../TrackDialog/Margin/VBox/LoopCheck")
+TrackOkButton = NodePath("../../TrackDialog/Margin/VBox/Buttons/OkButton")
+TrackCancelButton = NodePath("../../TrackDialog/Margin/VBox/Buttons/CancelButton")
+
+[node name="PlaylistPlugin" type="Node" parent="PluginHost" unique_id=883016645 node_paths=PackedStringArray("PlaylistMenu", "PlaylistSaveDialog", "PlaylistLoadDialog")]
+script = ExtResource("10_playlist")
+PlaylistMenu = NodePath("../../Main/TopBar/Toolbar/PlaylistMenu")
+PlaylistSaveDialog = NodePath("../../PlaylistSaveDialog")
+PlaylistLoadDialog = NodePath("../../PlaylistLoadDialog")
+
+[node name="HotkeyPlugin" type="Node" parent="PluginHost" unique_id=1634487699 node_paths=PackedStringArray("HotkeySettingsButton", "HotkeyDialog", "HotkeyButton0", "HotkeyButton1", "HotkeyButton2", "HotkeyButton3", "HotkeyPassthrough0", "HotkeyPassthrough1", "HotkeyPassthrough2", "HotkeyPassthrough3", "HotkeyClear0", "HotkeyClear1", "HotkeyClear2", "HotkeyClear3", "HotkeyOkButton", "HotkeyCancelButton")]
+script = ExtResource("11_hotkeys")
+HotkeySettingsButton = NodePath("../../Main/TopBar/Toolbar/HotkeySettingsButton")
+HotkeyDialog = NodePath("../../HotkeyDialog")
+HotkeyButton0 = NodePath("../../HotkeyDialog/Margin/VBox/Row0/HotkeyButton0")
+HotkeyButton1 = NodePath("../../HotkeyDialog/Margin/VBox/Row1/HotkeyButton1")
+HotkeyButton2 = NodePath("../../HotkeyDialog/Margin/VBox/Row2/HotkeyButton2")
+HotkeyButton3 = NodePath("../../HotkeyDialog/Margin/VBox/Row3/HotkeyButton3")
+HotkeyPassthrough0 = NodePath("../../HotkeyDialog/Margin/VBox/Row0/PassthroughCheck0")
+HotkeyPassthrough1 = NodePath("../../HotkeyDialog/Margin/VBox/Row1/PassthroughCheck1")
+HotkeyPassthrough2 = NodePath("../../HotkeyDialog/Margin/VBox/Row2/PassthroughCheck2")
+HotkeyPassthrough3 = NodePath("../../HotkeyDialog/Margin/VBox/Row3/PassthroughCheck3")
+HotkeyClear0 = NodePath("../../HotkeyDialog/Margin/VBox/Row0/ClearButton0")
+HotkeyClear1 = NodePath("../../HotkeyDialog/Margin/VBox/Row1/ClearButton1")
+HotkeyClear2 = NodePath("../../HotkeyDialog/Margin/VBox/Row2/ClearButton2")
+HotkeyClear3 = NodePath("../../HotkeyDialog/Margin/VBox/Row3/ClearButton3")
+HotkeyOkButton = NodePath("../../HotkeyDialog/Margin/VBox/Buttons/OkButton")
+HotkeyCancelButton = NodePath("../../HotkeyDialog/Margin/VBox/Buttons/CancelButton")
+
+[node name="DevicePlugin" type="Node" parent="PluginHost" unique_id=1451034773 node_paths=PackedStringArray("DeviceTable", "RegisterButton", "UnbindButton", "UnregisterButton")]
+script = ExtResource("12_devices")
+DeviceTable = NodePath("../../Main/TablesRow/Devices/TableContainer")
+DeviceRowScene = ExtResource("6_devrow")
+RegisterButton = NodePath("../../Main/TopBar/Toolbar/RegisterButton")
+UnbindButton = NodePath("../../Main/TopBar/Toolbar/UnbindButton")
+UnregisterButton = NodePath("../../Main/TopBar/Toolbar/UnregisterButton")
+RefreshIntervalSeconds = 2.28
+
+[node name="OverlayPlugin" type="Node" parent="PluginHost" unique_id=200090056 node_paths=PackedStringArray("OverlayToggle", "OverlayLockToggle", "OverlayWindow", "OverlayHud")]
+script = ExtResource("13_overlay")
+OverlayToggle = NodePath("../../Main/TopBar/Toolbar/OverlayToggle")
+OverlayLockToggle = NodePath("../../Main/TopBar/Toolbar/OverlayLockToggle")
+OverlayWindow = NodePath("../../OverlayHud")
+OverlayHud = NodePath("../../OverlayHud/Hud")
+
+[node name="StatusPlugin" type="Node" parent="PluginHost" unique_id=890288816 node_paths=PackedStringArray("StatusLabel", "VersionLabel")]
+script = ExtResource("14_status")
+StatusLabel = NodePath("../../Main/TopBar/StatusLabel")
+VersionLabel = NodePath("../../VersionLabel")
+
+[node name="VersionLabel" type="Label" parent="." unique_id=1490172138]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -28.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.35)
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AudioFileDialog" type="FileDialog" parent="." unique_id=1359120267]
+title = "Open File(s)"
+file_mode = 1
+access = 2
+filters = PackedStringArray("*.wav,*.ogg,*.mp3 ; 音频文件")
+use_native_dialog = true
+
+[node name="Main" type="VBoxContainer" parent="." unique_id=664754596]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="TopBar" type="VBoxContainer" parent="Main" unique_id=1404374600]
+layout_mode = 2
+
+[node name="Toolbar" type="HFlowContainer" parent="Main/TopBar" unique_id=905381620]
+layout_mode = 2
+
+[node name="OpenButton" type="Button" parent="Main/TopBar/Toolbar" unique_id=1347153565]
+layout_mode = 2
+text = "打开音频..."
+
+[node name="PlayButton" type="Button" parent="Main/TopBar/Toolbar" unique_id=1894027911]
+layout_mode = 2
+text = "播放"
+
+[node name="MonitorToggle" type="CheckButton" parent="Main/TopBar/Toolbar" unique_id=880019744]
+layout_mode = 2
+button_pressed = true
+text = "监听"
+
+[node name="RegisterButton" type="Button" parent="Main/TopBar/Toolbar" unique_id=1487754682]
+layout_mode = 2
+text = "注册设备"
+
+[node name="UnbindButton" type="Button" parent="Main/TopBar/Toolbar" unique_id=1894630540]
+layout_mode = 2
+text = "取消绑定"
+
+[node name="UnregisterButton" type="Button" parent="Main/TopBar/Toolbar" unique_id=1770485976]
+layout_mode = 2
+text = "注销APO"
+
+[node name="VisualizerMode" type="OptionButton" parent="Main/TopBar/Toolbar" unique_id=1250641781]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "条形图"
+popup/item_0/id = 0
+popup/item_1/text = "圆圈"
+popup/item_1/id = 1
+
+[node name="HotkeySettingsButton" type="Button" parent="Main/TopBar/Toolbar" unique_id=1486338642]
+layout_mode = 2
+text = "热键设置"
+
+[node name="PlaylistMenu" type="MenuButton" parent="Main/TopBar/Toolbar" unique_id=1979141664]
+layout_mode = 2
+text = "歌单"
+
+[node name="OverlayToggle" type="CheckButton" parent="Main/TopBar/Toolbar" unique_id=1285834172]
+layout_mode = 2
+button_pressed = true
+text = "悬浮窗"
+
+[node name="OverlayLockToggle" type="CheckButton" parent="Main/TopBar/Toolbar" unique_id=92631831]
+layout_mode = 2
+button_pressed = true
+text = "锁定悬浮窗"
+
+[node name="HintLabel" type="Label" parent="Main/TopBar" unique_id=51815437]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.76, 0.92, 0.85)
+theme_override_font_sizes/font_size = 12
+text = "操作提示：拖放音频或点『打开音频…』导入 → 勾选采集设备 → 『注册设备』(需管理员) → 播放；全局热键在『热键设置』；歌单修改后自动保存"
+autowrap_mode = 3
+
+[node name="ProgressRow" type="HBoxContainer" parent="Main/TopBar" unique_id=851870750]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Main/TopBar/ProgressRow" unique_id=2087669983]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+show_percentage = false
+
+[node name="TimeLabel" type="Label" parent="Main/TopBar/ProgressRow" unique_id=1570141979]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "00:00 / 00:00"
+
+[node name="StatusLabel" type="Label" parent="Main/TopBar" unique_id=451629494]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "就绪"
+autowrap_mode = 3
+
+[node name="TablesRow" type="HBoxContainer" parent="Main" unique_id=48347251]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AudioFiles" type="ScrollContainer" parent="Main/TablesRow" unique_id=1802008864]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TableContainer" type="VBoxContainer" parent="Main/TablesRow/AudioFiles" unique_id=1579037501]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_62e2m")
+separation_horizontal = null
+separation_vertical = null
+metadata/_custom_type_script = "uid://baus40q78w7uq"
+
+[node name="TitleLine" type="HBoxContainer" parent="Main/TablesRow/AudioFiles/TableContainer" unique_id=1106755018]
+layout_mode = 2
+
+[node name="Name" type="PanelContainer" parent="Main/TablesRow/AudioFiles/TableContainer/TitleLine" unique_id=1860673288]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/TablesRow/AudioFiles/TableContainer/TitleLine/Name" unique_id=1602112266]
+layout_mode = 2
+text = "Audio Name"
+
+[node name="Status" type="PanelContainer" parent="Main/TablesRow/AudioFiles/TableContainer/TitleLine" unique_id=785364102]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.55
+
+[node name="Label" type="Label" parent="Main/TablesRow/AudioFiles/TableContainer/TitleLine/Status" unique_id=1926912619]
+layout_mode = 2
+text = "Status"
+
+[node name="Action" type="PanelContainer" parent="Main/TablesRow/AudioFiles/TableContainer/TitleLine" unique_id=390441131]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="Main/TablesRow/AudioFiles/TableContainer/TitleLine/Action" unique_id=1752284999]
+layout_mode = 2
+text = "操作"
+
+[node name="Devices" type="ScrollContainer" parent="Main/TablesRow" unique_id=388705289]
+custom_maximum_size = Vector2(560, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TableContainer" type="VBoxContainer" parent="Main/TablesRow/Devices" unique_id=420339828]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_62e2m")
+separation_horizontal = null
+separation_vertical = null
+metadata/_custom_type_script = "uid://baus40q78w7uq"
+
+[node name="TitleLine" type="HBoxContainer" parent="Main/TablesRow/Devices/TableContainer" unique_id=1268646615]
+layout_mode = 2
+
+[node name="Select" type="PanelContainer" parent="Main/TablesRow/Devices/TableContainer/TitleLine" unique_id=146725941]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.55
+
+[node name="Label" type="Label" parent="Main/TablesRow/Devices/TableContainer/TitleLine/Select" unique_id=2015029041]
+layout_mode = 2
+text = "选择"
+
+[node name="Name" type="PanelContainer" parent="Main/TablesRow/Devices/TableContainer/TitleLine" unique_id=1753567335]
+custom_minimum_size = Vector2(47, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/TablesRow/Devices/TableContainer/TitleLine/Name" unique_id=1028771660]
+layout_mode = 2
+text = "Name"
+
+[node name="Status" type="PanelContainer" parent="Main/TablesRow/Devices/TableContainer/TitleLine" unique_id=1956106038]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.55
+
+[node name="Label" type="Label" parent="Main/TablesRow/Devices/TableContainer/TitleLine/Status" unique_id=775541310]
+layout_mode = 2
+text = "Status"
+
+[node name="Visualizer" type="Control" parent="Main" unique_id=1125479883]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("4_ee4bf")
+
+[node name="TrackDialog" type="Window" parent="." unique_id=1208742149]
+oversampling_override = 1.0
+title = "音乐设置"
+initial_position = 4
+size = Vector2i(400, 280)
+visible = false
+unresizable = true
+
+[node name="Margin" type="MarginContainer" parent="TrackDialog" unique_id=2047031593]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="TrackDialog/Margin" unique_id=1258067913]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="TrackDialog/Margin/VBox" unique_id=1625631921]
+layout_mode = 2
+text = "音乐"
+
+[node name="HotkeyRow" type="HBoxContainer" parent="TrackDialog/Margin/VBox" unique_id=1546219230]
+layout_mode = 2
+
+[node name="HotkeyLabel" type="Label" parent="TrackDialog/Margin/VBox/HotkeyRow" unique_id=2014984862]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "热键"
+
+[node name="HotkeyButton" type="Button" parent="TrackDialog/Margin/VBox/HotkeyRow" unique_id=1029892940]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "未设置"
+
+[node name="ClearButton" type="Button" parent="TrackDialog/Margin/VBox/HotkeyRow" unique_id=1587850479]
+layout_mode = 2
+text = "清除"
+
+[node name="PassthroughCheck" type="CheckBox" parent="TrackDialog/Margin/VBox" unique_id=111789293]
+layout_mode = 2
+text = "热键下传到其他应用"
+
+[node name="LoopCheck" type="CheckBox" parent="TrackDialog/Margin/VBox" unique_id=2035756165]
+layout_mode = 2
+text = "循环播放"
+
+[node name="Buttons" type="HBoxContainer" parent="TrackDialog/Margin/VBox" unique_id=1477069972]
+layout_mode = 2
+alignment = 2
+
+[node name="OkButton" type="Button" parent="TrackDialog/Margin/VBox/Buttons" unique_id=1201344724]
+layout_mode = 2
+text = "确定"
+
+[node name="CancelButton" type="Button" parent="TrackDialog/Margin/VBox/Buttons" unique_id=260893428]
+layout_mode = 2
+text = "取消"
+
+[node name="HotkeyDialog" type="Window" parent="." unique_id=1205352377]
+oversampling_override = 1.0
+title = "全局热键"
+initial_position = 4
+size = Vector2i(480, 340)
+visible = false
+unresizable = true
+
+[node name="Margin" type="MarginContainer" parent="HotkeyDialog" unique_id=215515253]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="HotkeyDialog/Margin" unique_id=795640808]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Row0" type="HBoxContainer" parent="HotkeyDialog/Margin/VBox" unique_id=1206854550]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="HotkeyDialog/Margin/VBox/Row0" unique_id=22558329]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "播放/停止"
+
+[node name="HotkeyButton0" type="Button" parent="HotkeyDialog/Margin/VBox/Row0" unique_id=1230998795]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "未设置"
+
+[node name="ClearButton0" type="Button" parent="HotkeyDialog/Margin/VBox/Row0" unique_id=1118090622]
+layout_mode = 2
+text = "清除"
+
+[node name="PassthroughCheck0" type="CheckBox" parent="HotkeyDialog/Margin/VBox/Row0" unique_id=1764981560]
+layout_mode = 2
+text = "下传"
+
+[node name="Row1" type="HBoxContainer" parent="HotkeyDialog/Margin/VBox" unique_id=2083007260]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="HotkeyDialog/Margin/VBox/Row1" unique_id=1441881218]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "上一首"
+
+[node name="HotkeyButton1" type="Button" parent="HotkeyDialog/Margin/VBox/Row1" unique_id=787850876]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "未设置"
+
+[node name="ClearButton1" type="Button" parent="HotkeyDialog/Margin/VBox/Row1" unique_id=1351437524]
+layout_mode = 2
+text = "清除"
+
+[node name="PassthroughCheck1" type="CheckBox" parent="HotkeyDialog/Margin/VBox/Row1" unique_id=382376811]
+layout_mode = 2
+text = "下传"
+
+[node name="Row2" type="HBoxContainer" parent="HotkeyDialog/Margin/VBox" unique_id=122917819]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="HotkeyDialog/Margin/VBox/Row2" unique_id=2142822616]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "下一首"
+
+[node name="HotkeyButton2" type="Button" parent="HotkeyDialog/Margin/VBox/Row2" unique_id=1086945927]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "未设置"
+
+[node name="ClearButton2" type="Button" parent="HotkeyDialog/Margin/VBox/Row2" unique_id=1859871552]
+layout_mode = 2
+text = "清除"
+
+[node name="PassthroughCheck2" type="CheckBox" parent="HotkeyDialog/Margin/VBox/Row2" unique_id=507806313]
+layout_mode = 2
+text = "下传"
+
+[node name="Row3" type="HBoxContainer" parent="HotkeyDialog/Margin/VBox" unique_id=122917820]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="HotkeyDialog/Margin/VBox/Row3" unique_id=2142822617]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+text = "暂停/恢复"
+
+[node name="HotkeyButton3" type="Button" parent="HotkeyDialog/Margin/VBox/Row3" unique_id=1086945928]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "未设置"
+
+[node name="ClearButton3" type="Button" parent="HotkeyDialog/Margin/VBox/Row3" unique_id=1859871553]
+layout_mode = 2
+text = "清除"
+
+[node name="PassthroughCheck3" type="CheckBox" parent="HotkeyDialog/Margin/VBox/Row3" unique_id=507806314]
+layout_mode = 2
+text = "下传"
+
+[node name="Buttons" type="HBoxContainer" parent="HotkeyDialog/Margin/VBox" unique_id=1756070869]
+layout_mode = 2
+alignment = 2
+
+[node name="OkButton" type="Button" parent="HotkeyDialog/Margin/VBox/Buttons" unique_id=1126843606]
+layout_mode = 2
+text = "确定"
+
+[node name="CancelButton" type="Button" parent="HotkeyDialog/Margin/VBox/Buttons" unique_id=1249286982]
+layout_mode = 2
+text = "取消"
+
+[node name="PlaylistSaveDialog" type="FileDialog" parent="." unique_id=1221953263]
+oversampling_override = 1.0
+title = "Open a File or Directory"
+initial_position = 4
+file_mode = 3
+access = 2
+filters = PackedStringArray("*.json ; 歌单")
+use_native_dialog = true
+
+[node name="PlaylistLoadDialog" type="FileDialog" parent="." unique_id=864173703]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 4
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json ; 歌单")
+use_native_dialog = true
+
+[node name="OverlayHud" type="Window" parent="." unique_id=1455942256]
+transparent_bg = true
+oversampling_override = 1.0
+initial_position = 4
+size = Vector2i(420, 300)
+visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+force_native = true
+
+[node name="Hud" type="Control" parent="OverlayHud" unique_id=140923195 node_paths=PackedStringArray("StatusLabel", "FramesLabel", "PlaylistLabel", "TracksLabel", "HotkeysLabel", "Visualizer", "ProgressBar", "TimeLabel", "Panel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_kbped")
+StatusLabel = NodePath("Panel/VBox/StatusRow/Status")
+FramesLabel = NodePath("Panel/VBox/StatusRow/Frames")
+PlaylistLabel = NodePath("Panel/VBox/Playlist")
+TracksLabel = NodePath("Panel/VBox/Tracks")
+HotkeysLabel = NodePath("Panel/VBox/Hotkeys")
+Visualizer = NodePath("Panel/VBox/Visualizer")
+ProgressBar = NodePath("Panel/VBox/ProgressRow/ProgressBar")
+TimeLabel = NodePath("Panel/VBox/ProgressRow/Time")
+Panel = NodePath("Panel")
+
+[node name="Panel" type="PanelContainer" parent="OverlayHud/Hud" unique_id=648035284]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fj5cn")
+
+[node name="VBox" type="VBoxContainer" parent="OverlayHud/Hud/Panel" unique_id=739432791]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StatusRow" type="HBoxContainer" parent="OverlayHud/Hud/Panel/VBox" unique_id=325098787]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Status" type="Label" parent="OverlayHud/Hud/Panel/VBox/StatusRow" unique_id=325098786]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="Frames" type="Label" parent="OverlayHud/Hud/Panel/VBox/StatusRow" unique_id=325098788]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.85, 0.9, 1, 0.9)
+theme_override_font_sizes/font_size = 12
+
+[node name="Playlist" type="Label" parent="OverlayHud/Hud/Panel/VBox" unique_id=1036087961]
+modulate = Color(0.8, 0.95, 0.8, 0.9)
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="Tracks" type="Label" parent="OverlayHud/Hud/Panel/VBox" unique_id=519371913]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 3
+
+[node name="Hotkeys" type="Label" parent="OverlayHud/Hud/Panel/VBox" unique_id=1667661904]
+modulate = Color(0.75, 0.85, 1, 0.9)
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="Visualizer" type="Control" parent="OverlayHud/Hud/Panel/VBox" unique_id=360587750]
+custom_minimum_size = Vector2(380, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+script = ExtResource("4_ee4bf")
+
+[node name="ProgressRow" type="HBoxContainer" parent="OverlayHud/Hud/Panel/VBox" unique_id=638817642]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="OverlayHud/Hud/Panel/VBox/ProgressRow" unique_id=1586416386]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+show_percentage = false
+
+[node name="Time" type="Label" parent="OverlayHud/Hud/Panel/VBox/ProgressRow" unique_id=1160535863]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "00:00 / 00:00"

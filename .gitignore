@@ -1,0 +1,7 @@
+.godot
+
+# APO 签名产物（安装时由 InjectAudioApo_unsign.dll 复制并签名生成）
+bin/InjectAudioApo.dll
+bin/InjectAudioApo.dll.locked_*
+bin/*
+bin/InjectAudioApo.dll
