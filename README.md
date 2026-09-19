@@ -1,7 +1,8 @@
-# CustomSoundpad Frontend（Godot 4.7 + C# + C++ GDExtension）
+# CustomSoundpad Frontend（Godot 4.7 + C#）
+> 更正: C++ Out!  
 
 播放音频 -> 抓帧 -> 写入 APO 共享内存（`Global\InjectAudioPcmRingBuffer`）-> 由 APO 注入麦克风。
-同时提供 ApoWriter 的 **C#** 与 **C++** 两套实现，可随时切换对比。
+同时提供 ApoWriter 的 **C#** 与  两套实现，可随时切换对比。
 
 ## 目录结构
 
@@ -33,10 +34,6 @@
 ```powershell
 # C#
 dotnet build "apoFrontend.csproj"
-
-# C++ GDExtension（需要 VS 生成工具 + scons + godot-cpp 子模块）
-scons platform=windows target=template_debug arch=x86_64 api_version=4.7 -j8
-# 产物自动复制到 project/bin/windows/
 ```
 
 - 注册/绑定/注销 APO 需要**管理员权限**；环形缓冲（Global 映射）同样需要。
